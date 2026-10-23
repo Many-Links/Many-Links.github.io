@@ -172,9 +172,47 @@ section{border-bottom:2px solid var(--ink)}
   .sk:nth-child(2n){padding-left:0;border-left:0}
   .side{grid-template-columns:1fr}
 }
+/* ---------- motion & interaction ---------- */
+.name .ch{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1),color .2s}
+.name .ch:hover{transform:translateY(-.09em) rotate(-4deg);color:var(--blue)}
+#rot{display:inline-block}
+.road-fill{position:absolute;top:0;left:50%;width:28px;height:0;transform:translateX(-50%);z-index:0;
+  background:var(--blue) repeating-linear-gradient(to bottom,transparent 0 18px,var(--paper) 18px 34px,transparent 34px 52px) center/4px 100% no-repeat}
+.stop .card{transition:transform .25s ease,box-shadow .25s ease}
+.stop .card:hover{transform:translate(-5px,-5px);box-shadow:10px 10px 0 var(--blue)}
+.node{transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .3s}
+.stop:not(.lit) .node{background:var(--ink)}
+.stop.lit .node{transform:scale(1.06)}
+.mile.lit .dot{background:var(--blue)}
+.mile.goal.lit .dot{background:var(--paper);animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 6px var(--paper),0 0 0 6px var(--blue)}100%{box-shadow:0 0 0 6px var(--paper),0 0 0 26px transparent}}
+.dg svg .bx{transition:transform .2s ease;transform-box:fill-box;transform-origin:center}
+.dg svg .bx:hover{transform:translateY(-3px)}
+.dg svg .bx:not(.hl):not(.dk):hover rect{fill:var(--blue);stroke:var(--blue)}
+.dg svg .bx:not(.hl):not(.dk):hover text{fill:var(--on-blue)}
+.sk{transition:background .2s,color .2s}
+.sk:hover{background:var(--blue);color:var(--on-blue)}
+.sk:hover h3{color:var(--on-blue)}
+.p h3{transition:color .2s}
+.p:hover h3{color:var(--blue)}
+.copy{transition:transform .15s}
+.copy:active{transform:scale(.95)}
+.cursor{position:fixed;left:0;top:0;width:22px;height:22px;border-radius:50%;background:var(--blue);pointer-events:none;z-index:50;
+  transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;opacity:0;mix-blend-mode:multiply}
+.cursor.big{width:64px;height:64px;opacity:.35}
 @media (prefers-reduced-motion:no-preference){
   .track{animation:scroll 38s linear infinite}
   @keyframes scroll{to{transform:translateX(-50%)}}
+  .ticker:hover .track{animation-play-state:paused}
+  .name .ch{animation:drop .7s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(var(--i) * 35ms)}
+  @keyframes drop{from{transform:translateY(-.5em) rotate(-8deg)}to{transform:none}}
+  .rot-in{animation:rotin .45s cubic-bezier(.2,1.2,.4,1)}
+  @keyframes rotin{from{transform:translateY(.4em) rotateX(70deg);opacity:0}to{transform:none;opacity:1}}
+  .dg svg .ln:not(.dash){stroke-dasharray:7 5;animation:flow .9s linear infinite}
+  .dg svg .ln.dash{animation:flow 1.8s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-12}}
+  .pre{opacity:0;transform:translateY(44px)}
+  .reveal{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.9,.3,1)}
 }
 </style>
 </head>
@@ -188,7 +226,7 @@ section{border-bottom:2px solid var(--ink)}
 <header class="hero pad"><div class="in">
   <h1 class="name">Abderrahmane<br>Guemmar</h1>
   <div class="hero-row">
-    <p class="role">Je transforme des données en <em>décisions</em> : modèles ML, API et dashboards, de bout en bout.</p>
+    <p class="role">Je transforme des données en <em id="rot">décisions</em> : modèles ML, API et dashboards, de bout en bout.</p>
     <div class="meta">
       <div><b>Formation</b>M2 Intelligence Artificielle, Université d'Artois</div>
       <div><b>Basé à</b>Lens / Lille</div>
@@ -207,6 +245,7 @@ section{border-bottom:2px solid var(--ink)}
   <div class="sh"><h2>Road&shy;map</h2><p>De la BI au machine learning en production : chaque stage a ajouté une brique à la chaîne de la donnée.</p></div>
 
   <div class="road">
+    <div class="road-fill" aria-hidden="true"></div>
 
     <div class="mile r"><div class="dot"></div><div class="txt">2021 · Départ<span>Licence Informatique, Université d'Artois</span></div></div>
 
@@ -421,6 +460,62 @@ document.querySelectorAll('.copy').forEach(function(b){
     try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
   });
 });
+
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Name: split into letters
+  var name=document.querySelector('.name'),i=0;
+  name.setAttribute('aria-label',name.textContent.replace(/\s+/g,' ').trim());
+  [].slice.call(name.childNodes).forEach(function(n){
+    if(n.nodeType!==3)return;
+    var frag=document.createDocumentFragment();
+    n.textContent.split('').forEach(function(c){
+      var s=document.createElement('span');s.className='ch';s.textContent=c;s.style.setProperty('--i',i++);s.setAttribute('aria-hidden','true');frag.appendChild(s);
+    });
+    name.replaceChild(frag,n);
+  });
+
+  // Rotating word
+  var words=['décisions','prédictions','dashboards','API','modèles ML'],w=0,rot=document.getElementById('rot');
+  if(!reduce)setInterval(function(){
+    w=(w+1)%words.length;rot.textContent=words[w];
+    rot.classList.remove('rot-in');void rot.offsetWidth;rot.classList.add('rot-in');
+  },2200);
+
+  // Road progress + milestones lighting up
+  var road=document.querySelector('.road'),fill=document.querySelector('.road-fill');
+  var marks=[].slice.call(road.querySelectorAll('.stop,.mile'));
+  function onScroll(){
+    var r=road.getBoundingClientRect(),mid=window.innerHeight*0.6;
+    var h=Math.max(0,Math.min(r.height,mid-r.top));
+    fill.style.height=h+'px';
+    marks.forEach(function(m){
+      var dot=m.querySelector('.node,.dot'),dr=dot.getBoundingClientRect();
+      m.classList.toggle('lit',dr.top+dr.height/2<mid);
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+
+  // Reveal on scroll (only for what starts below the fold, so the first screen is complete)
+  if(!reduce&&'IntersectionObserver' in window){
+    var els=[].slice.call(document.querySelectorAll('.stop .card,.mile .txt,.p,.sk,.e,.sh h2'));
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el,k){
+      if(el.getBoundingClientRect().top>window.innerHeight){el.classList.add('pre','reveal');el.style.transitionDelay=(k%3)*70+'ms';io.observe(el)}
+    });
+  }
+
+  // Cursor follower (desktop only)
+  if(!reduce&&window.matchMedia('(hover: hover) and (pointer: fine)').matches){
+    var c=document.createElement('div');c.className='cursor';document.body.appendChild(c);
+    var x=0,y=0,cx=0,cy=0;
+    document.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;c.style.opacity=1});
+    document.addEventListener('mouseleave',function(){c.style.opacity=0});
+    document.addEventListener('mouseover',function(e){c.classList.toggle('big',!!e.target.closest('a,button,.card,.bx,.sk'))});
+    (function loop(){cx+=(x-cx)*.18;cy+=(y-cy)*.18;c.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop)})();
+  }
+})();
 </script>
 
 </body>
