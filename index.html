@@ -223,7 +223,7 @@ a{color:var(--gold)}
 .proj{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:30px;align-items:center;padding-block:10px 70px}
 .pchar{position:relative;justify-self:center;width:min(320px,74vw)}
 .pchar .char{animation:bob 3s ease-in-out infinite}
-.pchar .pc-hit{position:absolute;left:24%;top:46%;width:52%;height:22%;border:0;background:transparent;cursor:pointer;border-radius:12px}
+.pchar .pc-hit{position:absolute;left:26%;top:47%;width:48%;height:19%;border:0;background:transparent;cursor:pointer;border-radius:12px}
 .pchar .bubble{left:56%;top:0}
 .pchar .bubble::after{right:auto;left:22px}
 .flash .pc .logo{animation:flash .6s}
@@ -618,25 +618,8 @@ var HEADS={"smile": {"w": 258, "h": 400, "uri": "data:image/webp;base64,UklGRoZH
 
   /* ---------- characters ---------- */
   function head(k,x,y,w){var h=w*HEADS[k].h/HEADS[k].w;return '<image href="'+HEADS[k].uri+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h.toFixed(1)+'"/>'}
-  function laptopSVG(){return '<svg viewBox="0 0 300 560" aria-hidden="true">'+
-    '<path d="M72 392 L148 392 L141 524 L93 524 Z" fill="#e6e1d3"/><path d="M152 392 L228 392 L207 524 L159 524 Z" fill="#dcd6c6"/>'+
-    '<ellipse cx="114" cy="532" rx="32" ry="12" fill="#c8955c"/><ellipse cx="186" cy="532" rx="32" ry="12" fill="#c8955c"/>'+
-    '<path d="M95 226 Q150 210 205 226 L232 252 L238 402 L62 402 L68 252 Z" fill="#1f2128"/>'+head('smile',75,8,150)+
-    '<path d="M118 214 L150 240 L138 256 Z M182 214 L150 240 L162 256 Z" fill="#2c2f38"/><path d="M140 226 L150 246 L160 226 Z" fill="'+SK+'"/>'+
-    '<path d="M74 258 L56 326" stroke="#1f2128" stroke-width="30" stroke-linecap="round"/><path d="M56 326 L84 334" stroke="'+SK+'" stroke-width="22" stroke-linecap="round"/>'+
-    '<path d="M226 258 L244 326" stroke="#1f2128" stroke-width="30" stroke-linecap="round"/><path d="M244 326 L216 334" stroke="'+SK+'" stroke-width="22" stroke-linecap="round"/>'+
-    '<g class="pc"><rect x="82" y="270" width="136" height="94" rx="9" fill="#d3dbe6" stroke="#aeb9c6" stroke-width="3"/><rect x="74" y="361" width="152" height="11" rx="5" fill="#9aa6b4"/>'+
-    '<circle class="logo" cx="150" cy="316" r="15" fill="#ffc845"/><text x="150" y="321" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="14" fill="#1b2036">AG</text></g>'+
-    '<circle cx="84" cy="334" r="12" fill="'+SK+'"/><circle cx="216" cy="334" r="12" fill="'+SK+'"/></svg>'}
-  function gradSVG(){return '<svg viewBox="0 0 300 560" aria-hidden="true">'+
-    '<path d="M92 262 Q150 246 208 262 L250 540 L50 540 Z" fill="#151a2e"/><path d="M130 258 L118 530 L136 530 L144 266 Z M170 258 L182 530 L164 530 L156 266 Z" fill="#ffc845"/>'+
-    '<path d="M94 278 L68 420" stroke="#151a2e" stroke-width="34" stroke-linecap="round"/><circle cx="68" cy="430" r="13" fill="'+SK+'"/>'+
-    '<path d="M206 276 L252 156" stroke="#151a2e" stroke-width="34" stroke-linecap="round"/>'+head('wink',75,46,150)+
-    '<path d="M132 250 L150 280 L168 250 Z" fill="#ffffff"/>'+
-    '<g><rect x="104" y="64" width="92" height="24" rx="7" fill="#10131f"/><path d="M150 34 L232 60 L150 86 L68 60 Z" fill="#1d2340" stroke="#4d7cff" stroke-width="2"/>'+
-    '<circle cx="150" cy="60" r="4.5" fill="#ffc845"/><g class="tassel"><path d="M150 60 L206 68 L206 104" stroke="#ffc845" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="200" y="102" width="12" height="18" rx="3" fill="#ffc845"/></g></g>'+
-    '<circle cx="254" cy="146" r="13" fill="'+SK+'"/><g transform="rotate(-28 254 128)"><rect x="212" y="117" width="86" height="24" rx="12" fill="#fffaf0" stroke="#e5d9bd" stroke-width="2"/><rect x="250" y="114" width="9" height="30" fill="#e0453a"/><path d="M254 144 L246 162 M256 144 L264 162" stroke="#e0453a" stroke-width="4" stroke-linecap="round"/></g>'+
-    '<ellipse cx="112" cy="545" rx="30" ry="10" fill="#0b0d16"/><ellipse cx="188" cy="545" rx="30" ry="10" fill="#0b0d16"/></svg>'}
+  function laptopSVG(){return '<svg viewBox="0 0 300 560" aria-hidden="true">'+'<path d="M76 392 L148 392 L142 522 L96 522 Z" fill="#e6e1d3"/><path d="M152 392 L224 392 L204 522 L158 522 Z" fill="#dcd6c6"/>'+'<ellipse cx="117" cy="530" rx="30" ry="11" fill="#c8955c"/><ellipse cx="183" cy="530" rx="30" ry="11" fill="#c8955c"/>'+head('smile',68.6,14,150)+'<path d="M150 218 C116 218 94 222 82 234 Q68 246 66 272 L62 402 L238 402 L234 272 Q232 246 218 234 C206 222 184 218 150 218Z" fill="#1f2128"/>'+'<path d="M135 218 L150 244 L165 218 Z" fill="'+SK+'"/><path d="M124 214 L150 244 L138 258 L112 224 Z M176 214 L150 244 L162 258 L188 224 Z" fill="#2c2f38"/>'+'<path d="M80 244 L60 320" stroke="#1f2128" stroke-width="30" stroke-linecap="round"/><path d="M60 322 L86 334" stroke="'+SK+'" stroke-width="21" stroke-linecap="round"/>'+'<path d="M220 244 L240 320" stroke="#1f2128" stroke-width="30" stroke-linecap="round"/><path d="M240 322 L214 334" stroke="'+SK+'" stroke-width="21" stroke-linecap="round"/>'+'<g class="pc"><rect x="84" y="272" width="132" height="92" rx="9" fill="#d3dbe6" stroke="#aeb9c6" stroke-width="3"/><rect x="76" y="361" width="148" height="11" rx="5" fill="#9aa6b4"/>'+'<circle class="logo" cx="150" cy="317" r="15" fill="#ffc845"/><text x="150" y="322" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="14" fill="#1b2036">AG</text></g>'+'<circle cx="86" cy="334" r="11.5" fill="'+SK+'"/><circle cx="214" cy="334" r="11.5" fill="'+SK+'"/></svg>'}
+  function gradSVG(){return '<svg viewBox="0 0 300 560" aria-hidden="true">'+head('wink',92.9,64.5,150)+'<path d="M150 256 C118 256 98 262 88 276 L52 540 L248 540 L212 276 C202 262 182 256 150 256Z" fill="#151a2e"/>'+'<path d="M136 256 L150 284 L164 256 Z" fill="#ffffff"/><path d="M132 262 L120 530 L138 530 L146 282 Z M168 262 L180 530 L162 530 L154 282 Z" fill="#ffc845"/>'+'<path d="M92 284 L70 420" stroke="#151a2e" stroke-width="32" stroke-linecap="round"/><circle cx="70" cy="430" r="12.5" fill="'+SK+'"/>'+'<path d="M208 282 L250 164" stroke="#151a2e" stroke-width="32" stroke-linecap="round"/>'+'<g transform="translate(6 22) rotate(-9 152 80)"><rect x="110" y="78" width="86" height="24" rx="7" fill="#10131f"/><path d="M153 48 L234 74 L153 100 L72 74 Z" fill="#1d2340" stroke="#4d7cff" stroke-width="2"/>'+'<circle cx="153" cy="74" r="4.5" fill="#ffc845"/><g class="tassel"><path d="M153 74 L208 82 L208 118" stroke="#ffc845" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="202" y="116" width="12" height="18" rx="3" fill="#ffc845"/></g></g>'+'<circle cx="252" cy="154" r="12.5" fill="'+SK+'"/><g transform="rotate(-28 252 136)"><rect x="210" y="125" width="86" height="24" rx="12" fill="#fffaf0" stroke="#e5d9bd" stroke-width="2"/><rect x="248" y="122" width="9" height="30" fill="#e0453a"/><path d="M252 152 L244 170 M254 152 L262 170" stroke="#e0453a" stroke-width="4" stroke-linecap="round"/></g>'+'<ellipse cx="114" cy="545" rx="28" ry="9" fill="#0b0d16"/><ellipse cx="186" cy="545" rx="28" ry="9" fill="#0b0d16"/></svg>'}
   $$('[data-char]').forEach(function(el){el.innerHTML=el.dataset.char==='grad'?gradSVG():laptopSVG()});
   $$('img[data-head]').forEach(function(im){im.src=HEADS[im.dataset.head].uri});
   $('#tokimg').setAttribute('href',HEADS.smile.uri);
