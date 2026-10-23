@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio d'Abderrahmane Guemmar, étudiant en M2 Intelligence Artificielle : data science, machine learning, back-end.">
+<title>Abderrahmane Guemmar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+/* Layout: Swiss / poster. Giant blue name, experiences as a road with milestones, an architecture schema per milestone/project. Single deliberate light look. */
+:root{
+  --paper:#f2f0eb;
+  --white:#fbfaf7;
+  --ink:#0b0b0b;
+  --blue:#1f3dff;
+  --on-blue:#ffffff;
+  --grey:#6b6b6b;
+  --f:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--paper);color:var(--ink)}
+body{margin:0;font-family:var(--f);font-size:18px;line-height:1.45}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.in{max-width:1280px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+h1,h2,h3{margin:0;font-weight:900;text-wrap:balance}
+
+/* top bar */
+.bar{border-bottom:2px solid var(--ink)}
+.bar .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:14px;font-weight:600;font-size:15px}
+.bar nav{display:flex;gap:22px;flex-wrap:wrap}
+.bar nav a{text-decoration:none}
+.bar nav a:hover{color:var(--blue)}
+
+/* hero */
+.hero .in{padding-block:40px 0}
+.name{font-size:clamp(56px,15.5vw,230px);line-height:.82;letter-spacing:-.045em;font-stretch:72%;font-weight:900;text-transform:uppercase;color:var(--ink)}
+.hero-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;border-top:2px solid var(--ink);margin-top:36px;padding-block:24px 48px}
+.hero-row .role{grid-column:span 7;margin:0;font-size:clamp(26px,3.4vw,46px);line-height:1.05;font-weight:800;font-stretch:90%;letter-spacing:-.02em}
+.hero-row .role em{font-style:normal;background:var(--blue);color:var(--on-blue);padding:0 .15em}
+.hero-row .meta{grid-column:span 5;display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;align-content:start;font-size:15px}
+.meta b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);font-weight:600;margin-bottom:2px}
+
+/* ticker */
+.ticker{background:var(--ink);color:var(--paper);overflow:hidden;border-block:2px solid var(--ink)}
+.track{display:flex;width:max-content;white-space:nowrap;font-weight:800;font-stretch:115%;font-size:clamp(22px,3vw,34px);text-transform:uppercase;padding-block:14px}
+.track span{padding-right:36px}
+.track span::after{content:"✳";color:var(--blue);padding-left:36px}
+
+/* sections */
+section{border-bottom:2px solid var(--ink)}
+.sh{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;padding-block:56px 40px}
+.sh h2{grid-column:1 / span 8;font-size:clamp(44px,8vw,120px);line-height:.88;letter-spacing:-.04em;font-stretch:75%;text-transform:uppercase}
+.sh p{grid-column:9 / span 4;margin:0;align-self:end;font-size:17px;color:var(--grey)}
+
+/* roadmap */
+.road{position:relative;display:flex;flex-direction:column;gap:56px;padding-bottom:64px}
+.road::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:28px;transform:translateX(-50%);
+  background:var(--ink) repeating-linear-gradient(to bottom,transparent 0 18px,var(--paper) 18px 34px,transparent 34px 52px) center/4px 100% no-repeat}
+.stop{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 140px minmax(0,1fr);align-items:start}
+.node{grid-column:2;grid-row:1;justify-self:center;position:relative;z-index:1;width:116px;height:116px;border-radius:50%;background:var(--blue);color:var(--on-blue);border:6px solid var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-stretch:72%;font-size:40px;line-height:.9;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.node small{font-size:12px;font-weight:700;font-stretch:100%;letter-spacing:.05em;text-transform:uppercase;margin-top:4px}
+.stop .card{grid-row:1;background:var(--white);border:2px solid var(--ink);padding:26px;display:flex;flex-direction:column;gap:14px;min-width:0;position:relative}
+.stop.l .card{grid-column:1}
+.stop.r .card{grid-column:3}
+.stop .card::before{content:"";position:absolute;top:56px;width:34px;height:2px;background:var(--ink)}
+.stop.l .card::before{right:-36px}
+.stop.r .card::before{left:-36px}
+.card .when{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--grey)}
+.card h3{font-size:clamp(26px,2.6vw,36px);line-height:1;letter-spacing:-.02em;font-stretch:85%}
+.card .org{font-weight:800;color:var(--blue);margin-top:-6px}
+.card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:16px}
+.card li{padding-left:18px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;background:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border:1.5px solid var(--ink);padding:3px 8px}
+
+.mile{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 140px minmax(0,1fr);align-items:center}
+.mile .dot{grid-column:2;justify-self:center;z-index:1;width:40px;height:40px;background:var(--ink);border:6px solid var(--paper);border-radius:50%}
+.mile .txt{font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:.02em}
+.mile .txt span{display:block;font-size:13px;font-weight:600;color:var(--grey);letter-spacing:.05em}
+.mile.l .txt{grid-column:1;grid-row:1;text-align:right}
+.mile.r .txt{grid-column:3;grid-row:1}
+.mile.goal .dot{width:64px;height:64px;background:var(--paper);border:6px solid var(--blue);box-shadow:0 0 0 6px var(--paper)}
+.mile.goal .txt{color:var(--blue);font-size:22px}
+
+/* diagrams */
+.dg{border:2px solid var(--ink);background:var(--paper);overflow-x:auto}
+.dg-cap{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-bottom:2px solid var(--ink);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.dg-cap span:last-child{color:var(--blue)}
+.dg svg{display:block;width:100%;min-width:480px;height:auto;padding:14px}
+.dg svg text{font-family:var(--f);font-weight:700;font-size:13px;fill:var(--ink)}
+.dg svg .bx rect{fill:var(--white);stroke:var(--ink);stroke-width:2}
+.dg svg .hl rect{fill:var(--blue);stroke:var(--blue)}
+.dg svg .hl text{fill:var(--on-blue)}
+.dg svg .dk rect{fill:var(--ink);stroke:var(--ink)}
+.dg svg .dk text{fill:var(--paper)}
+.dg svg .ln{stroke:var(--ink);stroke-width:2;fill:none}
+.dg svg .ln.dash{stroke-dasharray:5 5}
+.dg svg .lb{font-size:11px;font-weight:600;fill:var(--grey)}
+.dg svg .ah{fill:var(--ink)}
+
+/* projects */
+.proj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:2px solid var(--ink)}
+.p{padding:32px 32px 40px 0;display:flex;flex-direction:column;gap:18px;min-width:0}
+.p + .p{border-left:2px solid var(--ink);padding-left:32px;padding-right:0}
+.p .tag{align-self:flex-start;background:var(--blue);color:var(--on-blue);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;padding:5px 10px}
+.p h3{font-size:clamp(34px,4.2vw,60px);line-height:.92;letter-spacing:-.035em;font-stretch:78%;text-transform:uppercase}
+.p ul{margin:0;padding-left:20px;font-size:16px;display:flex;flex-direction:column;gap:6px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
+.sk{padding:24px 24px 32px 0;border-bottom:1px solid var(--ink);min-width:0}
+.sk:nth-child(3n+2),.sk:nth-child(3n){padding-left:24px;border-left:1px solid var(--ink)}
+.sk h3{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:12px}
+.sk p{margin:0;font-size:clamp(20px,2vw,26px);font-weight:700;line-height:1.2;font-stretch:88%;letter-spacing:-.01em}
+.skills-wrap{padding-bottom:56px}
+
+/* education */
+.edu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
+.e{padding:24px 24px 36px 0;min-width:0}
+.e + .e{border-left:1px solid var(--ink);padding-left:24px}
+.e .y{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--grey)}
+.e h3{font-size:clamp(24px,2.6vw,34px);line-height:1;letter-spacing:-.02em;font-stretch:85%;margin:10px 0 8px}
+.e.now{background:var(--blue);color:var(--on-blue);padding-left:24px}
+.e.now .y{color:var(--on-blue)}
+.side{display:grid;grid-template-columns:1fr 1fr;gap:24px;border-top:1px solid var(--ink);padding-block:24px 56px;font-size:16px}
+.side b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);margin-bottom:6px}
+
+/* contact */
+.contact{background:var(--blue);color:var(--on-blue);border-bottom:0}
+.contact .in{padding-block:64px 40px}
+.contact h2{font-size:clamp(52px,11vw,170px);line-height:.84;letter-spacing:-.045em;font-stretch:72%;text-transform:uppercase}
+.lines{margin-top:40px;border-top:2px solid var(--on-blue)}
+.line{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:18px;border-bottom:2px solid var(--on-blue)}
+.line .v{font-size:clamp(20px,3.4vw,44px);font-weight:800;font-stretch:90%;letter-spacing:-.02em;user-select:all;word-break:break-all}
+.line .k{font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;opacity:.8}
+.copy{font-family:var(--f);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.05em;background:var(--on-blue);color:var(--blue);border:0;padding:12px 18px;cursor:pointer}
+.copy:hover{background:var(--ink);color:var(--on-blue)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;font-size:14px;font-weight:600}
+
+@media (max-width:900px){
+  .hero-row .role,.hero-row .meta,.sh h2,.sh p{grid-column:1 / -1}
+  .road::before{left:30px}
+  .stop,.mile{grid-template-columns:60px minmax(0,1fr);column-gap:18px}
+  .node{grid-column:1;width:64px;height:64px;font-size:22px;border-width:4px}
+  .node small{display:none}
+  .stop.l .card,.stop.r .card{grid-column:2}
+  .stop .card::before{display:none}
+  .stop .card{padding:20px}
+  .mile .dot{grid-column:1}
+  .mile.l .txt,.mile.r .txt{grid-column:2;text-align:left}
+  .mile.goal .dot{width:52px;height:52px}
+  .proj{grid-template-columns:1fr}
+  .p,.p + .p{padding:28px 0 36px;border-left:0}
+  .p + .p{border-top:2px solid var(--ink)}
+  .skills{grid-template-columns:1fr 1fr}
+  .sk,.sk:nth-child(3n+2),.sk:nth-child(3n){padding:20px 16px 24px 0;border-left:0}
+  .sk:nth-child(2n){padding-left:16px;border-left:1px solid var(--ink)}
+  .edu{grid-template-columns:1fr}
+  .e,.e + .e{border-left:0;padding-left:0}
+  .e + .e{border-top:1px solid var(--ink)}
+  .e.now{padding-left:16px;padding-right:16px}
+}
+@media (max-width:480px){
+  .skills{grid-template-columns:1fr}
+  .sk:nth-child(2n){padding-left:0;border-left:0}
+  .side{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .track{animation:scroll 38s linear infinite}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+}
+</style>
+</head>
+<body>
+
+<div class="bar pad"><div class="in">
+  <span>A. Guemmar — Data &amp; IA</span>
+  <nav><a href="#xp">Roadmap</a><a href="#projets">Projets</a><a href="#stack">Stack</a><a href="#contact">Contact</a><a href="https://github.com/Many-links" target="_blank" rel="noopener">GitHub ↗</a></nav>
+</div></div>
+
+<header class="hero pad"><div class="in">
+  <h1 class="name">Abderrahmane<br>Guemmar</h1>
+  <div class="hero-row">
+    <p class="role">Je transforme des données en <em>décisions</em> : modèles ML, API et dashboards, de bout en bout.</p>
+    <div class="meta">
+      <div><b>Formation</b>M2 Intelligence Artificielle, Université d'Artois</div>
+      <div><b>Basé à</b>Lens / Lille</div>
+      <div><b>Expérience</b>3 stages : Djezzy, GSK, Trans Log M</div>
+      <div><b>Langues</b>Français natif, anglais B1/B2</div>
+    </div>
+  </div>
+</div></header>
+
+<div class="ticker" aria-hidden="true"><div class="track">
+  <span>Python</span><span>Machine Learning</span><span>XGBoost</span><span>TensorFlow</span><span>Spring Boot</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>Power BI</span><span>OpenCV</span>
+  <span>Python</span><span>Machine Learning</span><span>XGBoost</span><span>TensorFlow</span><span>Spring Boot</span><span>FastAPI</span><span>React</span><span>PostgreSQL</span><span>Power BI</span><span>OpenCV</span>
+</div></div>
+
+<section id="xp" class="pad"><div class="in">
+  <div class="sh"><h2>Road&shy;map</h2><p>De la BI au machine learning en production : chaque stage a ajouté une brique à la chaîne de la donnée.</p></div>
+
+  <div class="road">
+
+    <div class="mile r"><div class="dot"></div><div class="txt">2021 · Départ<span>Licence Informatique, Université d'Artois</span></div></div>
+
+    <!-- 2024 Djezzy -->
+    <div class="stop l">
+      <div class="node">2024<small>BI</small></div>
+      <article class="card">
+        <div class="when">Mars – Juin 2024 · Stage</div>
+        <h3>Business Intelligence</h3>
+        <div class="org">Optium Telecom · Djezzy</div>
+        <ul>
+          <li>Dashboard Net Promoter Score sous Power BI pour le pilotage marketing.</li>
+          <li>Data warehouse et serveur OLAP, modélisation en schéma en étoile.</li>
+          <li>Flux ETL automatisés avec SQL Server et Talend.</li>
+        </ul>
+        <div class="dg">
+          <div class="dg-cap"><span>Pipeline décisionnel</span><span>ETL → OLAP</span></div>
+          <svg viewBox="0 0 640 150" role="img" aria-label="Sources de données vers ETL Talend, data warehouse SQL Server, cube OLAP puis dashboard Power BI">
+            <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+            <g class="bx"><rect x="2" y="40" width="104" height="60"/><text x="54" y="63" text-anchor="middle">Sources</text><text x="54" y="80" text-anchor="middle">clients / NPS</text></g>
+            <g class="bx"><rect x="136" y="40" width="104" height="60"/><text x="188" y="63" text-anchor="middle">ETL</text><text x="188" y="80" text-anchor="middle">Talend</text></g>
+            <g class="bx dk"><rect x="270" y="40" width="104" height="60"/><text x="322" y="63" text-anchor="middle">Data</text><text x="322" y="80" text-anchor="middle">Warehouse</text></g>
+            <g class="bx"><rect x="404" y="40" width="104" height="60"/><text x="456" y="63" text-anchor="middle">Cube</text><text x="456" y="80" text-anchor="middle">OLAP</text></g>
+            <g class="bx hl"><rect x="538" y="40" width="100" height="60"/><text x="588" y="63" text-anchor="middle">Power BI</text><text x="588" y="80" text-anchor="middle">Dashboard</text></g>
+            <path class="ln" d="M106 70 H134" marker-end="url(#a1)"/>
+            <path class="ln" d="M240 70 H268" marker-end="url(#a1)"/>
+            <path class="ln" d="M374 70 H402" marker-end="url(#a1)"/>
+            <path class="ln" d="M508 70 H536" marker-end="url(#a1)"/>
+            <text class="lb" x="322" y="122" text-anchor="middle">SQL Server · schéma en étoile</text>
+            <text class="lb" x="588" y="122" text-anchor="middle">pilotage marketing</text>
+            <text class="lb" x="188" y="122" text-anchor="middle">extraction · nettoyage</text>
+          </svg>
+        </div>
+        <div class="chips"><span class="chip">Power BI</span><span class="chip">SQL Server</span><span class="chip">Talend</span><span class="chip">OLAP</span></div>
+      </article>
+    </div>
+
+    <div class="mile r"><div class="dot"></div><div class="txt">2024 · Licence validée<span>Entrée en Master, parcours IA</span></div></div>
+
+    <!-- 2025 GSK -->
+    <div class="stop r">
+      <div class="node">2025<small>Data Sci.</small></div>
+      <article class="card">
+        <div class="when">Avril – Juillet 2025 · Stage</div>
+        <h3>Full-Stack &amp; Data Science</h3>
+        <div class="org">GlaxoSmithKline (GSK)</div>
+        <ul>
+          <li>Smart Dashboard décisionnel pour prévoir les ventes et suivre la performance commerciale.</li>
+          <li>Front React.js, back Python / Flask, en équipe Agile.</li>
+          <li>Modèle supervisé Scikit-learn / XGBoost pour prédire les KPI commerciaux.</li>
+          <li>Nettoyage des données avec Pandas / NumPy, stockage PostgreSQL.</li>
+        </ul>
+        <div class="dg">
+          <div class="dg-cap"><span>Architecture Smart Dashboard</span><span>Web + ML</span></div>
+          <svg viewBox="0 0 560 210" role="img" aria-label="Dashboard React qui appelle une API Flask, elle-même reliée au modèle XGBoost et à PostgreSQL">
+            <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+            <g class="bx hl"><rect x="2" y="78" width="130" height="56"/><text x="67" y="101" text-anchor="middle">Smart Dashboard</text><text x="67" y="118" text-anchor="middle">React.js</text></g>
+            <g class="bx dk"><rect x="196" y="78" width="120" height="56"/><text x="256" y="101" text-anchor="middle">API</text><text x="256" y="118" text-anchor="middle">Python / Flask</text></g>
+            <g class="bx"><rect x="388" y="10" width="170" height="56"/><text x="473" y="33" text-anchor="middle">Modèle ML</text><text x="473" y="50" text-anchor="middle">XGBoost · Scikit-learn</text></g>
+            <g class="bx"><rect x="388" y="146" width="170" height="56"/><text x="473" y="169" text-anchor="middle">PostgreSQL</text><text x="473" y="186" text-anchor="middle">Pandas · NumPy</text></g>
+            <path class="ln" d="M134 106 H194" marker-start="url(#a2)" marker-end="url(#a2)"/>
+            <path class="ln" d="M316 96 L386 42" marker-end="url(#a2)"/>
+            <path class="ln" d="M316 116 L386 170" marker-start="url(#a2)" marker-end="url(#a2)"/>
+            <path class="ln dash" d="M473 144 V68" marker-end="url(#a2)"/>
+            <text class="lb" x="164" y="96" text-anchor="middle">REST</text>
+            <text class="lb" x="480" y="110">entraînement</text>
+            <text class="lb" x="330" y="58">KPI prédits</text>
+          </svg>
+        </div>
+        <div class="chips"><span class="chip">React</span><span class="chip">Flask</span><span class="chip">XGBoost</span><span class="chip">PostgreSQL</span></div>
+      </article>
+    </div>
+
+    <!-- 2026 Trans Log M -->
+    <div class="stop l">
+      <div class="node">2026<small>Back + ML</small></div>
+      <article class="card">
+        <div class="when">Avril – Août 2026 · Stage · Lille</div>
+        <h3>Développeur Backend &amp; Machine Learning</h3>
+        <div class="org">Trans Log M</div>
+        <ul>
+          <li>Module de gestion et d'analyse prédictive des coûts d'une flotte de véhicules.</li>
+          <li>API REST en Java / Spring Boot, données dans PostgreSQL.</li>
+          <li>Service ML en Python / FastAPI : prévision des dépenses et détection d'anomalies.</li>
+        </ul>
+        <div class="dg">
+          <div class="dg-cap"><span>Architecture microservices</span><span>Java + Python</span></div>
+          <svg viewBox="0 0 560 230" role="img" aria-label="Application cliente reliée à une API Spring Boot, qui s'appuie sur PostgreSQL et sur un service ML FastAPI">
+            <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+            <g class="bx"><rect x="2" y="88" width="120" height="56"/><text x="62" y="111" text-anchor="middle">Gestion</text><text x="62" y="128" text-anchor="middle">de flotte</text></g>
+            <g class="bx hl"><rect x="182" y="88" width="140" height="56"/><text x="252" y="111" text-anchor="middle">API REST</text><text x="252" y="128" text-anchor="middle">Java / Spring Boot</text></g>
+            <g class="bx"><rect x="388" y="10" width="170" height="56"/><text x="473" y="33" text-anchor="middle">PostgreSQL</text><text x="473" y="50" text-anchor="middle">véhicules · coûts</text></g>
+            <g class="bx dk"><rect x="388" y="152" width="170" height="56"/><text x="473" y="175" text-anchor="middle">Service ML</text><text x="473" y="192" text-anchor="middle">Python / FastAPI</text></g>
+            <path class="ln" d="M124 116 H180" marker-start="url(#a3)" marker-end="url(#a3)"/>
+            <path class="ln" d="M322 106 L386 44" marker-start="url(#a3)" marker-end="url(#a3)"/>
+            <path class="ln" d="M322 126 L386 178" marker-start="url(#a3)" marker-end="url(#a3)"/>
+            <path class="ln dash" d="M473 68 V150" marker-end="url(#a3)"/>
+            <text class="lb" x="482" y="114">historique</text>
+            <text class="lb" x="473" y="225" text-anchor="middle">prévision des dépenses · anomalies</text>
+            <text class="lb" x="152" y="106" text-anchor="middle">REST</text>
+          </svg>
+        </div>
+        <div class="chips"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span></div>
+      </article>
+    </div>
+
+    <div class="mile r"><div class="dot"></div><div class="txt">2026 · M1 validé<span>Entrée en M2 Intelligence Artificielle</span></div></div>
+
+    <div class="mile goal l"><div class="dot"></div><div class="txt">2027 · Prochaine étape<span>Diplôme de M2 IA, et la suite avec vous</span></div></div>
+
+  </div>
+</div></section>
+
+<section id="projets" class="pad"><div class="in">
+  <div class="sh"><h2>Projets</h2><p>Deux projets universitaires : un en deep learning, un en conception de langage.</p></div>
+  <div class="proj">
+    <article class="p">
+      <span class="tag">Computer vision</span>
+      <h3>Détection d'émotions en temps réel</h3>
+      <div class="dg">
+        <div class="dg-cap"><span>Pipeline d'inférence</span><span>Temps réel · CPU</span></div>
+        <svg viewBox="0 0 560 140" role="img" aria-label="Webcam vers OpenCV pour détecter le visage, puis CNN MobileNetV2, puis interface Streamlit">
+          <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+          <g class="bx"><rect x="2" y="30" width="112" height="60"/><text x="58" y="53" text-anchor="middle">Webcam</text><text x="58" y="70" text-anchor="middle">flux vidéo</text></g>
+          <g class="bx"><rect x="149" y="30" width="112" height="60"/><text x="205" y="53" text-anchor="middle">OpenCV</text><text x="205" y="70" text-anchor="middle">visage + norm.</text></g>
+          <g class="bx hl"><rect x="296" y="30" width="112" height="60"/><text x="352" y="53" text-anchor="middle">CNN</text><text x="352" y="70" text-anchor="middle">MobileNetV2</text></g>
+          <g class="bx dk"><rect x="443" y="30" width="115" height="60"/><text x="500" y="53" text-anchor="middle">Streamlit</text><text x="500" y="70" text-anchor="middle">scores</text></g>
+          <path class="ln" d="M114 60 H147" marker-end="url(#a4)"/>
+          <path class="ln" d="M261 60 H294" marker-end="url(#a4)"/>
+          <path class="ln" d="M408 60 H441" marker-end="url(#a4)"/>
+          <text class="lb" x="352" y="112" text-anchor="middle">transfer learning · FER2013</text>
+          <text class="lb" x="500" y="112" text-anchor="middle">7 émotions</text>
+        </svg>
+      </div>
+      <ul>
+        <li>CNN entraîné avec TensorFlow / Keras sur le dataset FER2013.</li>
+        <li>Détection et normalisation des visages en direct avec OpenCV.</li>
+        <li>Transfer learning MobileNetV2 pour rester fluide sur CPU.</li>
+        <li>Interface Streamlit qui affiche les scores de confiance des prédictions.</li>
+      </ul>
+    </article>
+    <article class="p">
+      <span class="tag">Langages</span>
+      <h3>Interpréteur Lisp en Java</h3>
+      <div class="dg">
+        <div class="dg-cap"><span>Chaîne d'interprétation</span><span>JVM</span></div>
+        <svg viewBox="0 0 560 170" role="img" aria-label="Script Lisp analysé par le parser en arbre syntaxique, exécuté par l'évaluateur avec son environnement, qui produit un rapport de tests">
+          <defs><marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+          <g class="bx"><rect x="2" y="24" width="112" height="60"/><text x="58" y="47" text-anchor="middle">Script</text><text x="58" y="64" text-anchor="middle">Lisp</text></g>
+          <g class="bx"><rect x="149" y="24" width="112" height="60"/><text x="205" y="47" text-anchor="middle">Parser</text><text x="205" y="64" text-anchor="middle">→ AST</text></g>
+          <g class="bx hl"><rect x="296" y="24" width="112" height="60"/><text x="352" y="47" text-anchor="middle">Évaluateur</text><text x="352" y="64" text-anchor="middle">expressions</text></g>
+          <g class="bx dk"><rect x="443" y="24" width="115" height="60"/><text x="500" y="47" text-anchor="middle">Rapport</text><text x="500" y="64" text-anchor="middle">de tests</text></g>
+          <g class="bx"><rect x="296" y="116" width="112" height="44"/><text x="352" y="143" text-anchor="middle">Environnement</text></g>
+          <path class="ln" d="M114 54 H147" marker-end="url(#a5)"/>
+          <path class="ln" d="M261 54 H294" marker-end="url(#a5)"/>
+          <path class="ln" d="M408 54 H441" marker-end="url(#a5)"/>
+          <path class="ln dash" d="M352 86 V114"/>
+          <text class="lb" x="420" y="142">variables · mémoire</text>
+          <text class="lb" x="500" y="106" text-anchor="middle">projets Java vérifiés</text>
+        </svg>
+      </div>
+      <ul>
+        <li>Interpréteur Lisp complet qui exécute du code dynamiquement dans la JVM.</li>
+        <li>Moteur de tests automatisés : des scripts Lisp vérifient des projets Java.</li>
+        <li>Parsing, évaluation d'expressions, mémoire et environnement d'exécution.</li>
+      </ul>
+    </article>
+  </div>
+</div></section>
+
+<section id="stack" class="pad"><div class="in skills-wrap">
+  <div class="sh"><h2>Stack</h2><p>Les outils avec lesquels j'ai livré, en stage ou en projet.</p></div>
+  <div class="skills">
+    <div class="sk"><h3>Data / ML</h3><p>Pandas, NumPy, Scikit-learn, XGBoost, TensorFlow, Keras, OpenCV</p></div>
+    <div class="sk"><h3>Back-end</h3><p>Python, Flask, FastAPI, Java, Spring Boot, JPA, Node.js, PHP, C, C#</p></div>
+    <div class="sk"><h3>Front-end</h3><p>React.js, JavaScript, HTML, CSS</p></div>
+    <div class="sk"><h3>Bases de données</h3><p>PostgreSQL, SQL Server, SQLite, Flyway</p></div>
+    <div class="sk"><h3>BI</h3><p>Power BI, Talend, OLAP, ETL</p></div>
+    <div class="sk"><h3>Outils</h3><p>Git, GitLab, Jupyter, Swagger, VS Code, Unity</p></div>
+  </div>
+</div></section>
+
+<section id="formation" class="pad"><div class="in">
+  <div class="sh"><h2>Formation</h2><p>Tout mon parcours à l'Université d'Artois, à Lens.</p></div>
+  <div class="edu">
+    <div class="e now"><div class="y">2026 – 2027 · en cours</div><h3>M2 Informatique, Intelligence Artificielle</h3></div>
+    <div class="e"><div class="y">2025 – 2026</div><h3>M1 Informatique, parcours IA</h3></div>
+    <div class="e"><div class="y">2021 – 2024</div><h3>Licence Informatique</h3></div>
+  </div>
+  <div class="side">
+    <div><b>Langues</b>Français, langue maternelle. Anglais, niveau intermédiaire (B1/B2).</div>
+    <div><b>Engagement 2023 – 2025</b>AFEV et Restos du Cœur : mentorat étudiant et actions solidaires.</div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact pad"><div class="in">
+  <h2>On<br>bosse<br>ensemble ?</h2>
+  <div class="lines">
+    <div class="line"><div><div class="k">E-mail</div><div class="v" id="v-mail">abdouguemmar@gmail.com</div></div><button class="copy" id="c-mail" data-target="v-mail" type="button">Copier</button></div>
+    <div class="line"><div><div class="k">Téléphone</div><div class="v" id="v-tel">+33 7 59 40 97 49</div></div><button class="copy" id="c-tel" data-target="v-tel" type="button">Copier</button></div>
+    <div class="line"><div><div class="k">GitHub</div><div class="v">github.com/Many-links</div></div><a class="copy" href="https://github.com/Many-links" target="_blank" rel="noopener" style="text-decoration:none">Voir mes repos</a></div>
+  </div>
+  <div class="foot"><span>© 2026 Abderrahmane Guemmar</span><span>Lens — Lille</span></div>
+</div></section>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.target),txt=el.textContent.trim();
+    function done(){b.textContent='Copié';setTimeout(function(){b.textContent='Copier'},1600)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Sélectionné'}
+    try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+  });
+});
+</script>
+
+</body>
+</html>
